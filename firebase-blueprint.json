@@ -1,0 +1,25 @@
+{
+  "entities": {
+    "MenuItem": {
+      "collection": "menuItems",
+      "fields": {
+        "id": { "type": "string", "description": "Unique identifier of the item" },
+        "name": { "type": "string", "description": "Name of the pastel or drink" },
+        "category": { "type": "string", "description": "Category slug" },
+        "price": { "type": "number", "description": "Price in BRL" },
+        "description": { "type": "string", "description": "Description" },
+        "ingredients": { "type": "array", "description": "List of ingredients" },
+        "image": { "type": "string", "description": "Image URL" },
+        "popular": { "type": "boolean", "description": "Is popular flag" },
+        "isGiga": { "type": "boolean", "description": "Is Giga size flag" },
+        "isSweet": { "type": "boolean", "description": "Is sweet pastel flag" },
+        "isVegetarian": { "type": "boolean", "description": "Is vegetarian flag" },
+        "sizeLabel": { "type": "string", "description": "Size label" },
+        "badge": { "type": "string", "description": "Promo badge" },
+        "available": { "type": "boolean", "description": "Item availability status" },
+        "orderIndex": { "type": "number", "description": "Display order index" },
+        "updatedAt": { "type": "timestamp", "description": "Last updated timestamp" }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /menuItems/{itemId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    match /storeConfig/{configId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

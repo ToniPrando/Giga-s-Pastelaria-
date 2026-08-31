@@ -1,0 +1,6 @@
+{
+  "name": "Giga's Pastelaria",
+  "description": "Site oficial da Giga's Pastelaria em Porto Feliz - SP. Os melhores pastéis artesanais, crocantes e recheados da cidade com delivery no iFood e WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
