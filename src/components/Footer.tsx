@@ -8,6 +8,7 @@ import {
   Heart, 
   Flame, 
   ShieldCheck,
+  Lock,
   Code
 } from 'lucide-react';
 import { Logo } from './Logo';
@@ -77,6 +78,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCodeExport, onOpenAdmin })
               <li><a href="#sobre" className="hover:text-amber-400 transition-colors">Sobre a Giga's</a></li>
               <li><a href="#avaliacoes" className="hover:text-amber-400 transition-colors">Depoimentos</a></li>
               <li><a href="#contato" className="hover:text-amber-400 transition-colors">Contato & Localização</a></li>
+              {onOpenAdmin && (
+                <li className="pt-1">
+                  <button
+                    onClick={onOpenAdmin}
+                    className="text-amber-400/90 hover:text-amber-300 font-semibold flex items-center gap-1.5 transition-colors cursor-pointer text-left"
+                    id="footer-nav-restricted-area-btn"
+                  >
+                    <Lock className="w-3.5 h-3.5 shrink-0 text-amber-400" />
+                    <span>Área Restrita (Administrador)</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -114,7 +127,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCodeExport, onOpenAdmin })
         </div>
 
         {/* Payment Methods & Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-semibold text-slate-400">Formas de Pagamento:</span>
             <span className="bg-slate-900 border border-slate-800 text-slate-300 px-2.5 py-1 rounded-md text-[11px] font-bold">PIX</span>
@@ -128,12 +141,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCodeExport, onOpenAdmin })
             {onOpenAdmin && (
               <button
                 onClick={onOpenAdmin}
-                className="flex items-center gap-1 text-slate-400 hover:text-amber-400 transition-colors font-medium"
-                id="footer-admin-btn"
+                className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors text-xs font-semibold cursor-pointer"
+                id="footer-bottom-restricted-area-btn"
               >
-                <span>⚙️ Gerenciar Cardápio</span>
+                <Lock className="w-3.5 h-3.5 text-amber-400" />
+                <span>Área Restrita (Administrador)</span>
               </button>
             )}
+
             {onOpenCodeExport && (
               <button
                 onClick={onOpenCodeExport}

@@ -270,13 +270,22 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
             </div>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
-            id="admin-modal-close-btn"
-          >
-            <X className="w-6 h-6" />
-          </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onClose}
+                className="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-xl border border-slate-700 transition-colors flex items-center gap-1.5"
+                title="Sair do modo administrativo"
+              >
+                <span>Encerrar Sessão</span>
+              </button>
+              <button
+                onClick={onClose}
+                className="p-2 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                id="admin-modal-close-btn"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
         </div>
 
         {/* Tab Selector & Quick Action Bar */}

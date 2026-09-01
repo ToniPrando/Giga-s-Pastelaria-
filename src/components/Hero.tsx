@@ -30,14 +30,14 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
         {/* Main Hero Bento Grid matching Vibrant Palette */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
-          {/* Main Vibrant Feature Banner (Left - 8 cols) */}
-          <div className="lg:col-span-8 bg-gradient-to-br from-rose-500 via-rose-600 to-rose-700 rounded-[2.5rem] p-8 sm:p-12 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl shadow-rose-900/20">
+          {/* Main Vibrant Feature Banner (Top on mobile, Left on desktop - 8 cols) */}
+          <div className="lg:col-span-8 bg-gradient-to-br from-rose-500 via-rose-600 to-rose-700 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 lg:p-12 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl shadow-rose-900/20">
             {/* Background Glow */}
             <div className="absolute -top-10 -right-10 w-80 h-80 bg-rose-400/20 rounded-full blur-3xl pointer-events-none"></div>
             <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-amber-400/20 rounded-full blur-2xl pointer-events-none"></div>
 
-            {/* Logo pinned neatly to the top-right edge like a stamp */}
-            <div className="absolute top-2 sm:top-4 -right-2 sm:right-0 md:right-2 lg:right-3 w-56 sm:w-72 md:w-80 lg:w-88 xl:w-96 aspect-square pointer-events-none select-none flex items-center justify-center z-[1] transform rotate-[-4deg] sm:rotate-[-6deg] drop-shadow-2xl">
+            {/* Desktop Logo: pinned neatly to the top-right edge like a stamp */}
+            <div className="hidden lg:flex absolute top-2 lg:top-4 lg:right-3 w-80 lg:w-88 xl:w-96 aspect-square pointer-events-none select-none items-center justify-center z-[1] transform rotate-[-4deg] drop-shadow-2xl">
               <img 
                 src={STORE_INFO.googleDriveLogoUrl} 
                 alt="Logo Giga's Pastelaria" 
@@ -48,8 +48,8 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
             </div>
 
             <div className="relative z-10 max-w-full lg:max-w-[60%] xl:max-w-[64%]">
-              {/* Badge */}
-              <div className="flex flex-wrap items-center gap-2 mb-5">
+              {/* Badges */}
+              <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-5">
                 <span className="inline-flex items-center gap-1.5 bg-amber-400 text-rose-950 text-xs font-black uppercase px-3.5 py-1.5 rounded-full shadow-xs tracking-wider">
                   <Flame className="w-3.5 h-3.5 fill-rose-900 text-rose-900" />
                   Porto Feliz - SP
@@ -61,23 +61,33 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-black font-heading leading-[0.95] tracking-tight mb-5 drop-shadow-md">
+              <h1 className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-black font-heading leading-[0.98] sm:leading-[0.95] tracking-tight mb-4 sm:mb-5 drop-shadow-md">
                 O PASTEL MAIS <br className="hidden sm:inline" />
                 <span className="text-amber-300 underline decoration-white/40 decoration-wavy">CROCANTE</span> DA <br className="hidden sm:inline" />
                 CIDADE.
               </h1>
 
               {/* Subtitle */}
-              <p className="text-rose-100 text-base sm:text-lg max-w-md lg:max-w-lg font-medium leading-relaxed mb-8 drop-shadow-sm">
+              <p className="text-rose-100 text-sm sm:text-base lg:text-lg max-w-md lg:max-w-lg font-medium leading-relaxed mb-2 sm:mb-6 drop-shadow-sm">
                 Massa sequinha de verdade, recheios generosos de ponta a ponta e o sabor inigualável da receita tradicional da <strong className="text-white">Giga's Pastelaria</strong>.
               </p>
+
+              {/* Mobile Logo: Displayed right below subtitle and above buttons, larger and closer to the text */}
+              <div className="flex lg:hidden justify-center items-center my-2 sm:my-4 py-1">
+                <img 
+                  src={STORE_INFO.googleDriveLogoUrl} 
+                  alt="Logo Giga's Pastelaria" 
+                  className="w-56 sm:w-64 max-w-[82vw] aspect-square object-contain drop-shadow-2xl select-none"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
             </div>
 
             {/* CTAs & Social Proof */}
-            <div className="relative z-10 pt-4 flex flex-wrap items-center gap-4">
+            <div className="relative z-10 pt-2 sm:pt-4 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
               <button
                 onClick={onScrollToMenu}
-                className="bg-white text-rose-600 hover:bg-rose-50 px-7 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg shadow-xl shadow-rose-950/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 cursor-pointer"
+                className="bg-white text-rose-600 hover:bg-rose-50 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-black text-base sm:text-lg shadow-xl shadow-rose-950/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
                 id="hero-view-menu-btn"
               >
                 <Utensils className="w-5 h-5 text-rose-600" />
@@ -88,7 +98,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
                 href={STORE_INFO.ifoodUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-amber-400 hover:bg-amber-300 text-rose-950 px-6 sm:px-7 py-4 rounded-2xl font-black text-base shadow-xl shadow-amber-500/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
+                className="bg-amber-400 hover:bg-amber-300 text-rose-950 px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl font-black text-base shadow-xl shadow-amber-500/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 w-full sm:w-auto"
                 id="hero-ifood-primary-btn"
               >
                 <ShoppingBag className="w-5 h-5" />
@@ -99,7 +109,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
                 href={`https://wa.me/${STORE_INFO.whatsappNumber}?text=Olá!%20Gostaria%20de%20fazer%20um%20pedido%20na%20Giga's%20Pastelaria`}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white/15 hover:bg-white/25 text-white px-5 py-4 rounded-2xl font-bold text-sm backdrop-blur-xs border border-white/20 transition-all flex items-center gap-1.5"
+                className="bg-white/15 hover:bg-white/25 text-white px-5 py-3.5 sm:py-4 rounded-2xl font-bold text-sm backdrop-blur-xs border border-white/20 transition-all flex items-center justify-center gap-1.5 w-full sm:w-auto"
                 id="hero-whatsapp-btn"
               >
                 <span>WhatsApp</span>
@@ -107,10 +117,10 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
               </a>
 
               {/* Social Proof */}
-              <div className="flex items-center gap-3 ml-auto hidden sm:flex">
+              <div className="flex items-center gap-3 sm:ml-auto justify-center sm:justify-start pt-2 sm:pt-0">
                 <div className="flex -space-x-2">
-                  <div className="w-9 h-9 rounded-full border-2 border-rose-600 bg-amber-300 flex items-center justify-center text-xs font-black text-rose-950 shadow-xs">5k</div>
-                  <div className="w-9 h-9 rounded-full border-2 border-rose-600 bg-white flex items-center justify-center text-xs font-black text-rose-600 shadow-xs">★</div>
+                  <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-full border-2 border-rose-600 bg-amber-300 flex items-center justify-center text-xs font-black text-rose-950 shadow-xs">5k</div>
+                  <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-full border-2 border-rose-600 bg-white flex items-center justify-center text-xs font-black text-rose-600 shadow-xs">★</div>
                 </div>
                 <div className="text-left">
                   <span className="block text-xs font-black text-white leading-tight">+5.000</span>

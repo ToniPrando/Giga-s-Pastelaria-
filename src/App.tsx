@@ -11,6 +11,7 @@ import { ItemModal } from './components/ItemModal';
 import { CartDrawer } from './components/CartDrawer';
 import { SingleHtmlExportModal } from './components/SingleHtmlExportModal';
 import { AdminManagerModal } from './components/AdminManagerModal';
+import { AdminLoginModal } from './components/AdminLoginModal';
 import { MenuItem, CartItem, CartExtra } from './types';
 import { MENU_ITEMS as DEFAULT_MENU_ITEMS } from './data/menuData';
 import { subscribeToMenuItems } from './services/menuService';
@@ -30,8 +31,24 @@ export default function App() {
   const [selectedItemForModal, setSelectedItemForModal] = useState<MenuItem | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
+  const [isAuthenticatedAdmin, setIsAuthenticatedAdmin] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const handleOpenAdmin = () => {
+    if (isAuthenticatedAdmin) {
+      setIsAdminModalOpen(true);
+    } else {
+      setIsAdminLoginOpen(true);
+    }
+  };
+
+  const handleAdminLoginSuccess = () => {
+    setIsAuthenticatedAdmin(true);
+    setIsAdminModalOpen(true);
+    showToast('Login de Administrador realizado com sucesso!');
+  };
 
   // Subscribe to real-time menu items from Firestore
   useEffect(() => {
@@ -159,10 +176,7 @@ export default function App() {
 
       {/* Main Header */}
       <Header 
-        cartCount={totalCartCount}
-        onOpenCart={() => setIsCartOpen(true)}
         onOpenCodeExport={() => setIsExportModalOpen(true)}
-        onOpenAdmin={() => setIsAdminModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -187,7 +201,7 @@ export default function App() {
       {/* Footer */}
       <Footer 
         onOpenCodeExport={() => setIsExportModalOpen(true)} 
-        onOpenAdmin={() => setIsAdminModalOpen(true)}
+        onOpenAdmin={handleOpenAdmin}
       />
 
       {/* Item Customization Modal */}
@@ -213,10 +227,20 @@ export default function App() {
         onClose={() => setIsExportModalOpen(false)}
       />
 
+      {/* Admin Login Modal (Protection Gate) */}
+      <AdminLoginModal
+        isOpen={isAdminLoginOpen}
+        onClose={() => setIsAdminLoginOpen(false)}
+        onSuccess={handleAdminLoginSuccess}
+      />
+
       {/* Real-time Firebase Firestore Admin Manager Modal */}
       <AdminManagerModal
         isOpen={isAdminModalOpen}
-        onClose={() => setIsAdminModalOpen(false)}
+        onClose={() => {
+          setIsAdminModalOpen(false);
+          setIsAuthenticatedAdmin(false); // require login on each fresh opening for strict security
+        }}
         items={menuItems}
         onShowToast={showToast}
       />

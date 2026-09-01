@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  ShoppingBag, 
   Menu as MenuIcon, 
   X, 
   Phone, 
-  Clock, 
   MapPin, 
-  Sparkles,
   ExternalLink,
   ChevronRight
 } from 'lucide-react';
@@ -14,15 +11,11 @@ import { Logo } from './Logo';
 import { STORE_INFO } from '../data/menuData';
 
 interface HeaderProps {
-  cartCount: number;
-  onOpenCart: () => void;
   onOpenCodeExport?: () => void;
   onOpenAdmin?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ 
-  cartCount, 
-  onOpenCart,
   onOpenCodeExport,
   onOpenAdmin
 }) => {
@@ -66,16 +59,6 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="flex items-center gap-3 ml-auto text-xs font-medium">
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                className="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1 font-bold bg-slate-800/80 px-2.5 py-0.5 rounded-md border border-slate-700 hover:border-amber-400/50"
-                id="header-top-admin-btn"
-              >
-                <span>⚙️ Gerenciar Cardápio</span>
-              </button>
-            )}
-            <span className="text-slate-700 hidden sm:inline">|</span>
             <a 
               href={STORE_INFO.instagramUrl} 
               target="_blank" 
@@ -85,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <span>{STORE_INFO.instagramHandle}</span>
             </a>
-            <span className="text-slate-700">|</span>
+            <span className="text-slate-700 hidden sm:inline">|</span>
             <a 
               href={`https://wa.me/${STORE_INFO.whatsappNumber}?text=Olá!%20Gostaria%20de%20fazer%20um%20pedido%20na%20Giga's%20Pastelaria`} 
               target="_blank" 
@@ -104,14 +87,14 @@ export const Header: React.FC<HeaderProps> = ({
       <nav 
         className={`w-full transition-all duration-300 ${
           isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-slate-200/50 py-2.5 border-b border-slate-100' 
-            : 'bg-white py-3.5 shadow-xs'
+            ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-slate-200/50 py-2 sm:py-2.5 border-b border-slate-100' 
+            : 'bg-white py-2.5 sm:py-3.5 shadow-xs'
         }`}
         aria-label="Menu Principal"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <a href="#inicio" className="focus:outline-none focus:ring-2 focus:ring-rose-500 rounded-2xl" id="nav-brand-link">
+          <a href="#inicio" className="focus:outline-none focus:ring-2 focus:ring-rose-500 rounded-2xl shrink-0" id="nav-brand-link">
             <Logo size="md" />
           </a>
 
@@ -131,57 +114,27 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Admin Management Button (Desktop) */}
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors border border-slate-200"
-                title="Cadastrar e editar pastéis, fotos e preços no banco de dados"
-                id="header-admin-menu-btn"
-              >
-                <span>⚙️ Gerenciar</span>
-              </button>
-            )}
-
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* iFood Button */}
             <a
               href={STORE_INFO.ifoodUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white px-4 sm:px-6 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-lg shadow-rose-200 transition-all active:scale-95 select-none"
+              className="inline-flex items-center gap-1 sm:gap-2 bg-rose-600 hover:bg-rose-700 text-white px-3 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-md sm:shadow-lg shadow-rose-200 transition-all active:scale-95 select-none whitespace-nowrap"
               id="header-ifood-cta-button"
             >
-              <span className="w-2 h-2 rounded-full bg-amber-300 animate-ping"></span>
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-300 animate-ping shrink-0"></span>
               <span className="font-extrabold tracking-tight">Peça pelo iFood</span>
             </a>
-
-            {/* Cart Button */}
-            <button
-              onClick={onOpenCart}
-              aria-label="Ver sacola de pedidos"
-              className="relative p-2.5 sm:px-4 sm:py-2.5 rounded-full bg-amber-50 hover:bg-amber-100/80 border border-amber-200 text-slate-800 font-bold text-xs sm:text-sm flex items-center gap-2 transition-all active:scale-95 shadow-xs"
-              id="header-cart-toggle-btn"
-            >
-              <div className="relative">
-                <ShoppingBag className="w-5 h-5 text-rose-600" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-rose-600 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center animate-bounce shadow-sm">
-                    {cartCount}
-                  </span>
-                )}
-              </div>
-              <span className="hidden md:inline text-slate-800">Sacola</span>
-            </button>
 
             {/* Mobile menu hamburger toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 lg:hidden focus:outline-none"
+              className="p-1.5 sm:p-2 rounded-xl text-slate-700 hover:bg-slate-100 lg:hidden focus:outline-none shrink-0"
               aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               id="mobile-menu-toggle-btn"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <MenuIcon className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>
@@ -209,19 +162,6 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
-            {onOpenAdmin && (
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenAdmin();
-                }}
-                className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-full font-bold text-sm shadow-md hover:bg-slate-800"
-                id="mobile-drawer-admin-btn"
-              >
-                <span>⚙️ Gerenciar Cardápio (Banco de Dados)</span>
-              </button>
-            )}
-
             <a
               href={STORE_INFO.ifoodUrl}
               target="_blank"
