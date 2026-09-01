@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Plus, Minus, Check, ShoppingBag, Flame, Sparkles, ExternalLink } from 'lucide-react';
 import { MenuItem, CartExtra } from '../types';
 import { AVAILABLE_EXTRAS, STORE_INFO } from '../data/menuData';
+import { handleImageError, resolveMenuItemImage } from '../utils/imageUtils';
 
 interface ItemModalProps {
   item: MenuItem | null;
@@ -47,10 +48,11 @@ export const ItemModal: React.FC<ItemModalProps> = ({ item, onClose, onAddToCart
         {/* Modal Header / Image */}
         <div className="relative h-56 sm:h-64 bg-slate-900 shrink-0">
           <img 
-            src={item.image} 
+            src={resolveMenuItemImage(item.image, item.category, item.id)} 
             alt={item.name} 
             className="w-full h-full object-cover object-center"
             referrerPolicy="no-referrer"
+            onError={(e) => handleImageError(e, item.category)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
           

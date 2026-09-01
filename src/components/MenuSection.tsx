@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { MenuItem, MenuCategory } from '../types';
 import { MENU_ITEMS, STORE_INFO } from '../data/menuData';
+import { handleImageError, resolveMenuItemImage } from '../utils/imageUtils';
 
 interface MenuSectionProps {
   items?: MenuItem[];
@@ -200,10 +201,11 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                   onClick={() => onSelectItem(item)}
                 >
                   <img
-                    src={item.image}
+                    src={resolveMenuItemImage(item.image, item.category, item.id)}
                     alt={item.name}
                     className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                     referrerPolicy="no-referrer"
+                    onError={(e) => handleImageError(e, item.category)}
                   />
 
                   {/* Gradient bottom shadow */}

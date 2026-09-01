@@ -27,8 +27,10 @@ import {
   updateMenuItem, 
   deleteMenuItem, 
   toggleItemAvailability,
-  resetToDefaultMenu 
+  resetToDefaultMenu,
+  subscribeToQuotaStatus
 } from '../services/menuService';
+import { handleImageError, resolveMenuItemImage, ASSET_IMAGES } from '../utils/imageUtils';
 
 interface AdminManagerModalProps {
   isOpen: boolean;
@@ -46,11 +48,12 @@ const CATEGORIES: { id: MenuCategory; label: string; icon: string }[] = [
 ];
 
 const PRESET_SAMPLE_IMAGES = [
-  { label: 'Pastel Giga Dourado', url: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80' },
-  { label: 'Pastel de Carne & Queijo', url: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=800&q=80' },
-  { label: 'Pastel Doce / Chocolate', url: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80' },
-  { label: 'Caldo de Cana Gelado', url: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80' },
-  { label: 'Porção de Mini Pastéis', url: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80' }
+  { label: 'Pastel Giga Especial (Oficial)', url: ASSET_IMAGES.giga },
+  { label: 'Pastel Salgado Carne/Queijo', url: ASSET_IMAGES.carne },
+  { label: 'Pastel Doce / Nutella', url: ASSET_IMAGES.doce },
+  { label: 'Caldo de Cana Natural', url: ASSET_IMAGES.caldoCana },
+  { label: 'Porção de Mini Pastéis', url: ASSET_IMAGES.porcao },
+  { label: 'Banner Tradicional Giga', url: ASSET_IMAGES.hero }
 ];
 
 export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
@@ -66,6 +69,14 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
   const [isSaving, setIsSaving] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<MenuItem | null>(null);
   const [isResetting, setIsResetting] = useState(false);
+  const [isQuotaExceeded, setIsQuotaExceeded] = useState(false);
+
+  React.useEffect(() => {
+    const unsub = subscribeToQuotaStatus((exceeded) => {
+      setIsQuotaExceeded(exceeded);
+    });
+    return () => unsub();
+  }, []);
 
   // Form State
   const [formData, setFormData] = useState<{
@@ -259,10 +270,17 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-extrabold text-base sm:text-lg text-white">Painel de Gerenciamento do Cardápio</h3>
-                <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Firebase Firestore Online
-                </span>
+                {isQuotaExceeded ? (
+                  <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                    Armazenamento Local Ativo (Cota Firebase Atingida)
+                  </span>
+                ) : (
+                  <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Firebase Firestore Online
+                  </span>
+                )}
               </div>
               <p className="text-xs text-slate-400">
                 Cadastre, altere preços, fotos e descrições em tempo real.
@@ -335,6 +353,32 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
         {/* Modal Body */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-100/50">
           
+          {/* Quota Exceeded Notice */}
+          {isQuotaExceeded && (
+            <div className="mb-4 bg-amber-50 border border-amber-200 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-amber-900 shadow-xs">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-xs">
+                  <p className="font-bold text-amber-950">
+                    Cota Diária Gratuita do Firebase Atingida (Reset Diário às 00:00 UTC)
+                  </p>
+                  <p className="text-amber-800 mt-0.5">
+                    O aplicativo ativou automaticamente a persistência local em cache. Você pode continuar adicionando, editando e gerenciando itens normalmente neste dispositivo. Se desejar remover o limite gratuito, faça upgrade para o plano Blaze no console do Firebase.
+                  </p>
+                </div>
+              </div>
+              <a
+                href="https://console.firebase.google.com/project/gen-lang-client-0113759551/firestore/databases/ai-studio-gigaspastelaria-2176429d-8ca5-4afc-b539-56af737ab544/data?openUpgradeDialog=true"
+                target="_blank"
+                rel="noreferrer"
+                className="shrink-0 text-xs font-bold bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-xl transition-colors flex items-center gap-1.5 shadow-xs"
+              >
+                <span>Console Firebase</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          )}
+
           {/* TAB 1: LIST OF ITEMS */}
           {activeTab === 'list' && (
             <div className="space-y-4">
@@ -408,12 +452,11 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
                         {/* Thumb */}
                         <div className="w-20 h-20 rounded-xl overflow-hidden bg-slate-100 shrink-0 relative border border-slate-100">
                           <img 
-                            src={item.image} 
+                            src={resolveMenuItemImage(item.image, item.category, item.id)} 
                             alt={item.name}
                             className="w-full h-full object-cover"
-                            onError={(e) => {
-                              (e.target as HTMLElement).setAttribute('src', 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80');
-                            }}
+                            referrerPolicy="no-referrer"
+                            onError={(e) => handleImageError(e, item.category)}
                           />
                           {item.badge && (
                             <span className="absolute top-1 left-1 bg-rose-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-xs">
