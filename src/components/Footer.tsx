@@ -101,8 +101,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCodeExport, onOpenAdmin })
               <li>🥟 Pastéis Tradicionais (22cm)</li>
               <li>👑 Pastéis Giga Especiais (30cm)</li>
               <li>🍫 Pastéis Doces Gourmet</li>
-              <li>🥤 Caldo de Cana Geladinho com Limão</li>
-              <li>🍟 Porções de Boteco & Mini Pastéis</li>
+              <li>🥤 Bebidas</li>
+              <li>🍟 Porções & Mini Pastéis</li>
             </ul>
           </div>
 

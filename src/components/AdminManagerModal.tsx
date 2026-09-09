@@ -19,7 +19,9 @@ import {
   Save,
   AlertTriangle,
   HelpCircle,
-  ExternalLink
+  ExternalLink,
+  Maximize2,
+  Minimize2
 } from 'lucide-react';
 import { MenuItem, MenuCategory } from '../types';
 import { 
@@ -70,6 +72,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
   const [itemToDelete, setItemToDelete] = useState<MenuItem | null>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isQuotaExceeded, setIsQuotaExceeded] = useState(false);
+  const [isMaximized, setIsMaximized] = useState(false);
 
   React.useEffect(() => {
     const unsub = subscribeToQuotaStatus((exceeded) => {
@@ -256,19 +259,25 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-xs animate-in fade-in duration-200"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs animate-in fade-in duration-200 ${
+        isMaximized ? 'p-0' : 'p-2 sm:p-6'
+      }`}
       id="admin-manager-modal"
     >
-      <div className="bg-white w-full max-w-4xl max-h-[92vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-slate-200">
+      <div className={`bg-white w-full flex flex-col overflow-hidden border border-slate-200 transition-all duration-200 ${
+        isMaximized 
+          ? 'h-full max-h-screen rounded-none shadow-none' 
+          : 'max-w-5xl max-h-[92vh] rounded-3xl shadow-2xl'
+      }`}>
         
         {/* Modal Top Header */}
-        <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
+        <div className="bg-slate-900 text-white px-4 sm:px-6 py-4 flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-rose-600 flex items-center justify-center text-white shadow-md">
+            <div className="w-10 h-10 rounded-2xl bg-rose-600 flex items-center justify-center text-white shadow-md shrink-0">
               <Database className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <h3 className="font-extrabold text-base sm:text-lg text-white">Painel de Gerenciamento do Cardápio</h3>
                 {isQuotaExceeded ? (
                   <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -282,24 +291,39 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 hidden sm:block">
                 Cadastre, altere preços, fotos e descrições em tempo real.
               </p>
             </div>
           </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <button
+                type="button"
+                onClick={() => setIsMaximized(!isMaximized)}
+                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors flex items-center justify-center cursor-pointer"
+                title={isMaximized ? "Restaurar tamanho da janela" : "Maximizar painel"}
+                id="admin-modal-maximize-btn"
+                aria-label={isMaximized ? "Restaurar tamanho da janela" : "Maximizar painel"}
+              >
+                {isMaximized ? (
+                  <Minimize2 className="w-5 h-5 text-amber-400" />
+                ) : (
+                  <Maximize2 className="w-5 h-5" />
+                )}
+              </button>
               <button
                 onClick={onClose}
-                className="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-xl border border-slate-700 transition-colors flex items-center gap-1.5"
+                className="hidden sm:flex text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-2 rounded-xl border border-slate-700 transition-colors items-center gap-1.5 cursor-pointer"
                 title="Sair do modo administrativo"
               >
                 <span>Encerrar Sessão</span>
               </button>
               <button
                 onClick={onClose}
-                className="p-2 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                className="p-2 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer"
                 id="admin-modal-close-btn"
+                title="Fechar"
               >
                 <X className="w-6 h-6" />
               </button>

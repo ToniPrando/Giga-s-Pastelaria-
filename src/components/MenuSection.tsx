@@ -51,11 +51,10 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
 
   const categories: { id: MenuCategory; label: string; icon: string }[] = [
     { id: 'todos', label: 'Cardápio Completo', icon: '📑' },
-    { id: 'mais-pedidos', label: 'Mais Pedidos', icon: '🔥' },
     { id: 'giga-especiais', label: 'Giga 30cm', icon: '👑' },
     { id: 'tradicionais', label: 'Tradicionais', icon: '🥟' },
     { id: 'doces', label: 'Doces', icon: '🍫' },
-    { id: 'bebidas', label: 'Caldo & Bebidas', icon: '🥤' },
+    { id: 'bebidas', label: 'Bebidas', icon: '🥤' },
     { id: 'porcoes', label: 'Porções & Combos', icon: '🍟' },
   ];
 
