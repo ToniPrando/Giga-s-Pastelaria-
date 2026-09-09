@@ -115,18 +115,6 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
                 <span>WhatsApp</span>
                 <ExternalLink className="w-4 h-4 opacity-80" />
               </a>
-
-              {/* Social Proof */}
-              <div className="flex items-center gap-3 sm:ml-auto justify-center sm:justify-start pt-2 sm:pt-0">
-                <div className="flex -space-x-2">
-                  <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-full border-2 border-rose-600 bg-amber-300 flex items-center justify-center text-xs font-black text-rose-950 shadow-xs">5k</div>
-                  <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-full border-2 border-rose-600 bg-white flex items-center justify-center text-xs font-black text-rose-600 shadow-xs">★</div>
-                </div>
-                <div className="text-left">
-                  <span className="block text-xs font-black text-white leading-tight">+5.000</span>
-                  <span className="block text-[11px] font-medium text-rose-200 leading-tight">Clientes Felizes</span>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -155,14 +143,21 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
 
               {/* Product Spotlight Box */}
               <div className="bg-white/60 backdrop-blur-xs p-4 rounded-2xl border border-white/60 shadow-xs mb-4">
-                <div className="relative h-28 rounded-xl overflow-hidden mb-3">
+                <div className="relative h-36 sm:h-40 rounded-xl overflow-hidden mb-3 bg-amber-950/10 flex items-center justify-center">
+                  <img 
+                    src={heroPastel} 
+                    alt="" 
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-110 pointer-events-none"
+                    referrerPolicy="no-referrer"
+                  />
                   <img 
                     src={heroPastel} 
                     alt="Pastel Giga Especial 30cm" 
-                    className="w-full h-full object-cover"
+                    className="relative z-10 max-h-full max-w-full w-auto h-auto object-contain p-2 drop-shadow-md"
                     referrerPolicy="no-referrer"
                   />
-                  <span className="absolute top-2 left-2 bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded-md uppercase">
+                  <span className="absolute top-2 left-2 bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded-md uppercase z-20 shadow-xs">
                     30cm
                   </span>
                 </div>
@@ -204,10 +199,10 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToMenu, onOpenCart }) => {
             </div>
             <div>
               <div className="flex items-center gap-1.5 font-black text-slate-900 text-lg">
-                <span>{STORE_INFO.rating}</span>
-                <span className="text-xs text-amber-500 font-bold">★★★★★</span>
+                <span>5.0</span>
+                <span className="text-sm text-amber-500 font-bold tracking-widest">★★★★★</span>
               </div>
-              <p className="text-xs text-slate-500 font-medium">Mais de 800 avaliações positivas</p>
+              <p className="text-xs text-slate-500 font-medium">5 estrelas em mais de 800 avaliações</p>
             </div>
           </div>
 

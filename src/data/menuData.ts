@@ -26,7 +26,7 @@ export const STORE_INFO = {
   hours: "Terça a Domingo: 18h00 às 23h30 (Segunda fechado)",
   deliveryTime: "30 a 45 min",
   deliveryFee: "A partir de R$ 5,00",
-  rating: "4.9",
+  rating: "5.0",
   reviewsCount: "840+"
 };
 

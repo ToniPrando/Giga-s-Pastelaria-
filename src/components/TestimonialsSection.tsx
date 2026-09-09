@@ -13,7 +13,7 @@ export const TestimonialsSection: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400 text-rose-950 text-xs font-black uppercase tracking-wider mb-3">
             <Star className="w-3.5 h-3.5 text-rose-950 fill-rose-950" />
-            Opinião de Quem Já Provou
+            Avaliações 5 Estrelas ★★★★★
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-heading tracking-tight">
             Amado por Porto Feliz
@@ -35,10 +35,15 @@ export const TestimonialsSection: React.FC = () => {
               
               <div>
                 {/* Rating stars */}
-                <div className="flex items-center gap-1 text-amber-400 mb-3">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
-                  ))}
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400" />
+                    ))}
+                  </div>
+                  <span className="text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/60">
+                    5 Estrelas
+                  </span>
                 </div>
 
                 <p className="text-slate-700 text-sm leading-relaxed italic">

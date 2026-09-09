@@ -50,7 +50,7 @@ export function generateSingleFileHtml(): string {
       </div>
       <div class="flex items-center gap-4 ml-auto font-medium">
         <a href="https://www.instagram.com/pastelaria_gigas" target="_blank" class="hover:text-amber-400">@pastelaria_gigas</a>
-        <a href="https://wa.me/5515998765432" target="_blank" class="text-emerald-400 font-bold hover:underline">WhatsApp Delivery</a>
+        <a href="https://wa.me/${STORE_INFO.whatsappNumber}" target="_blank" class="text-emerald-400 font-bold hover:underline">WhatsApp Delivery</a>
       </div>
     </div>
   </div>
@@ -65,7 +65,7 @@ export function generateSingleFileHtml(): string {
         </div>
         <div>
           <div class="flex items-center gap-1">
-            <span class="font-black text-xl font-heading text-stone-900 tracking-tight">GIGA'S</span>
+            <span class="font-black text-xl font-heading text-[#DE9E36] tracking-tight">GIGA'S</span>
             <span class="font-extrabold text-xl font-heading text-red-600 tracking-tight">PASTELARIA</span>
           </div>
           <span class="text-[10px] font-bold text-amber-700 uppercase tracking-widest block">Porto Feliz - SP</span>
@@ -83,10 +83,10 @@ export function generateSingleFileHtml(): string {
 
       <!-- CTAs -->
       <div class="flex items-center gap-3">
-        <a href="https://www.ifood.com.br/delivery/porto-feliz-sp/gigas-pastelaria-conjunto-habitacional-fortunato-fioravante-angelieri/dbd9385e-2bda-4022-8e91-468826add643?UTM_Medium=share&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafeDDy-e_sijXIDocatUtzPdqEDvAW6rqm7S7ipUthN0rxDl96VdbX8QXRBSA_aem_9b4yHhogIKEYhv81k0JoNA" target="_blank" class="bg-[#EA1D2C] hover:bg-[#c91825] text-white px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm shadow-md transition-all">
+        <a href="${STORE_INFO.ifoodUrl}" target="_blank" class="bg-[#EA1D2C] hover:bg-[#c91825] text-white px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm shadow-md transition-all">
           Pedir no iFood
         </a>
-        <a href="https://wa.me/5515998765432" target="_blank" class="hidden sm:inline-flex bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all">
+        <a href="https://wa.me/${STORE_INFO.whatsappNumber}" target="_blank" class="hidden sm:inline-flex bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all">
           WhatsApp
         </a>
       </div>
@@ -122,8 +122,8 @@ export function generateSingleFileHtml(): string {
 
           <div class="grid grid-cols-3 gap-4 pt-6 border-t border-stone-200 text-center sm:text-left">
             <div>
-              <p class="text-stone-900 font-black text-base">★ 4.9</p>
-              <p class="text-xs text-stone-500">Mais de 800 avaliações</p>
+              <p class="text-stone-900 font-black text-base">★ 5.0</p>
+              <p class="text-xs text-stone-500">5 estrelas (+800 avaliações)</p>
             </div>
             <div>
               <p class="text-stone-900 font-black text-base">30-45 min</p>
@@ -223,7 +223,16 @@ export function generateSingleFileHtml(): string {
         <a href="${STORE_INFO.ifoodUrl}" target="_blank" class="bg-[#EA1D2C] hover:bg-[#c91825] text-white px-4 py-2 rounded-xl text-xs font-bold">Delivery no iFood</a>
       </div>
 
-      <p class="text-[11px] text-stone-600">© 2026 Giga's Pastelaria. Todos os direitos reservados.</p>
+      <div class="flex flex-col items-center justify-center text-center gap-4 pt-8 border-t border-stone-800 text-xs">
+        <div class="flex flex-col items-center gap-1.5 text-center">
+          <span class="text-[11px] text-stone-400">Desenvolvido por</span>
+          <a href="https://toniaepprojetos.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-bold transition-colors">
+            <span>ToniAep - Criando Inovação</span>
+            <i data-lucide="external-link" class="w-3 h-3"></i>
+          </a>
+        </div>
+        <p class="text-[11px] text-stone-500">© 2026 Giga's Pastelaria. Todos os direitos reservados.</p>
+      </div>
     </div>
   </footer>
 

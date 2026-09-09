@@ -44,3 +44,29 @@
   background: #e11d48;
 }
 
+/* Dedicated scrollbar for the menu category buttons */
+.category-buttons-scrollbar {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #e11d48 #f1f5f9;
+}
+
+.category-buttons-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+.category-buttons-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 9999px;
+}
+
+.category-buttons-scrollbar::-webkit-scrollbar-thumb {
+  background: #e11d48;
+  border-radius: 9999px;
+  border: 1px solid #f1f5f9;
+}
+
+.category-buttons-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #be123c;
+}
+

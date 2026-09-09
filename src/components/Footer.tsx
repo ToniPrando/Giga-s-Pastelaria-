@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { STORE_INFO } from '../data/menuData';
+import toniaepLogo from '../assets/images/toniaep_logo.jpg';
 
 interface FooterProps {
   onOpenCodeExport?: () => void;
@@ -126,8 +127,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCodeExport, onOpenAdmin })
 
         </div>
 
-        {/* Payment Methods & Bottom Bar */}
-        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        {/* Payment Methods & Admin Bar */}
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 pb-6 border-b border-slate-900">
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-semibold text-slate-400">Formas de Pagamento:</span>
             <span className="bg-slate-900 border border-slate-800 text-slate-300 px-2.5 py-1 rounded-md text-[11px] font-bold">PIX</span>
@@ -159,10 +160,34 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCodeExport, onOpenAdmin })
                 <span>Código HTML Único</span>
               </button>
             )}
-            <p className="text-slate-500">
-              © {new Date().getFullYear()} Giga's Pastelaria. Todos os direitos reservados.
-            </p>
           </div>
+        </div>
+
+        {/* Bottom Attribution & ToniAep Link (Centered) */}
+        <div className="pt-8 flex flex-col items-center justify-center text-center gap-4 text-xs text-slate-500">
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-[11px] text-slate-400 font-medium">Desenvolvido por</span>
+            <a
+              href="https://toniaepprojetos.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2.5 bg-slate-900/90 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/60 rounded-xl px-4 py-2 transition-all duration-300 shadow-sm hover:shadow-cyan-950/20"
+              title="ToniAep - Criando Inovação (toniaepprojetos.com)"
+              id="footer-toniaep-logo-link"
+            >
+              <img
+                src={toniaepLogo}
+                alt="ToniAep - Criando Inovação"
+                className="h-8 sm:h-9 w-auto max-w-[150px] sm:max-w-[180px] object-contain rounded transition-transform duration-300 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+              />
+              <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-cyan-400 transition-colors shrink-0" />
+            </a>
+          </div>
+
+          <p className="text-slate-500 text-[11px]">
+            © {new Date().getFullYear()} Giga's Pastelaria. Todos os direitos reservados.
+          </p>
         </div>
 
       </div>

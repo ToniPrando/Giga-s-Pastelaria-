@@ -34,8 +34,8 @@ export const AboutSection: React.FC = () => {
 
               <div className="space-y-4 pt-6">
                 <div className="bg-amber-400 text-rose-950 p-5 rounded-3xl shadow-xl shadow-amber-200 flex flex-col justify-center text-center border border-amber-300">
-                  <span className="text-3xl sm:text-4xl font-black font-heading leading-none">4.9 ★</span>
-                  <span className="text-xs font-black text-rose-950 uppercase tracking-wider mt-1">Avaliação em Porto Feliz</span>
+                  <span className="text-3xl sm:text-4xl font-black font-heading leading-none">5.0 ★</span>
+                  <span className="text-xs font-black text-rose-950 uppercase tracking-wider mt-1">5 Estrelas em Porto Feliz</span>
                 </div>
                 <div className="rounded-3xl overflow-hidden shadow-lg border border-slate-100 bg-slate-100">
                   <img

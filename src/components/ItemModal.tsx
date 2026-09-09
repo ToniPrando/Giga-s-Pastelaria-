@@ -45,16 +45,25 @@ export const ItemModal: React.FC<ItemModalProps> = ({ item, onClose, onAddToCart
         onClick={(e) => e.stopPropagation()}
         id="item-detail-modal"
       >
-        {/* Modal Header / Image */}
-        <div className="relative h-56 sm:h-64 bg-slate-900 shrink-0">
+        {/* Modal Header / Image (Full view without cropping) */}
+        <div className="relative h-60 sm:h-72 bg-slate-950 shrink-0 overflow-hidden flex items-center justify-center">
+          {/* Ambient blurred backdrop */}
+          <img 
+            src={resolveMenuItemImage(item.image, item.category, item.id)} 
+            alt="" 
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 scale-125 pointer-events-none select-none"
+            referrerPolicy="no-referrer"
+          />
+          {/* Main uncropped image */}
           <img 
             src={resolveMenuItemImage(item.image, item.category, item.id)} 
             alt={item.name} 
-            className="w-full h-full object-cover object-center"
+            className="relative z-10 max-h-full max-w-full w-auto h-auto object-contain p-4 drop-shadow-2xl select-none"
             referrerPolicy="no-referrer"
             onError={(e) => handleImageError(e, item.category)}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none z-10" />
           
           <button 
             onClick={onClose}
